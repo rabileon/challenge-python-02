@@ -1,11 +1,55 @@
 # Resolve the problem!!
 import string
+import random
 
 SYMBOLS = list('!"#$%&\'()*+,-./:;?@[]^_`{|}~')
 
-
 def generate_password():
-    # Start coding here
+    longitud = random.randint(8,16)
+    password = []
+
+    def generate_list_caracter(longitud,password):
+        bCaracter0 = False
+        bCaracter1 = False 
+        bCaracter2 = False
+        bCaracter3 = False
+        for idx in range(longitud):
+            typeCaracter = random.randint(0,3)
+            if typeCaracter == 0 :
+                bCaracter0 = True
+                password.insert(idx,get_caracter(typeCaracter))
+            elif typeCaracter == 1 :
+                bCaracter1 = True
+                password.insert(idx,get_caracter(typeCaracter))
+            elif typeCaracter == 2 :
+                bCaracter2 = True
+                password.insert(idx,get_caracter(typeCaracter))
+            elif typeCaracter == 3 :
+                bCaracter3 = True
+                password.insert(idx,get_caracter(typeCaracter))
+        if not (bCaracter0  and bCaracter1 and bCaracter2 and bCaracter3):
+            bCaracter0 = False
+            bCaracter1 = False
+            bCaracter2 = False
+            bCaracter3 = False
+            password.clear()
+            generate_list_caracter(longitud,password)
+        else:
+            return password  
+
+    generate_list_caracter(longitud,password)
+    password_confirm =  ''.join(password)
+    return password_confirm
+
+def get_caracter(typeCaracter):
+    if typeCaracter == 0:
+        return SYMBOLS[random.randint(0, len(SYMBOLS)-1)]
+    elif typeCaracter == 1:
+        return string.ascii_uppercase[random.randint(0, len(string.ascii_uppercase )-1)]
+    elif  typeCaracter == 2:
+        return  string.digits[random.randint(0, len(string.digits)-1)]
+    elif typeCaracter == 3:
+        return  string.ascii_lowercase[random.randint(0, len(string.ascii_lowercase)-1)]
 
 
 def validate(password):
