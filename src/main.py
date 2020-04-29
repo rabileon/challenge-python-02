@@ -28,15 +28,9 @@ def generate_password():
                 bCaracter3 = True
                 password.insert(idx,get_caracter(typeCaracter))
         if not (bCaracter0  and bCaracter1 and bCaracter2 and bCaracter3):
-            bCaracter0 = False
-            bCaracter1 = False
-            bCaracter2 = False
-            bCaracter3 = False
             password.clear()
             generate_list_caracter(longitud,password)
-        else:
-            return password  
-
+    
     generate_list_caracter(longitud,password)
     password_confirm =  ''.join(password)
     return password_confirm
